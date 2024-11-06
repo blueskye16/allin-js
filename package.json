@@ -1,0 +1,14 @@
+{
+  "name": "dicoding",
+  "version": "1.0.0",
+  "description": "lets go javascript",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./dicoding-js/gas.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

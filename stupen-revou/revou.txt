@@ -1,0 +1,37 @@
+"Career development with AI tools - Memberikan bekal berupa soft skill yang penting dan dibutuhkan peserta untuk dapat sukses di industri teknologi. Serta, mempersiapkan aset-aset yang penting untuk memulai karir di industri teknologi
+
+Skor: 60
+
+Komentar: Belum memahami dengan baik terkait materi career development serta ke depannya diharapkan bisa lebih aktif saat sesi.
+
+===
+
+Data Processing with SQL using AI  - Memberikan pemahaman mendasar kepada peserta mengenai proses pengolahan data dengan menggunakan SQL. Selain itu, bagaimana peserta bisa memanfaatkan perangkat AI untuk membantu pengolahan data dengan menggunakan SQL.
+
+Skor: 60
+
+Komentar: Kurang memahami materi dengan baik serta ke depannya bisa lebih aktif lagi baik di sesi bersama team ataupun saat lecture bersama instructor.
+
+===
+
+Data Visualisation & Communication with AI - Memberikan pemahaman mendasar keada peserta mengenai proses visualisasi dan komunikasi data. Serta mampu memanfaatkan perangkat berbasis AI untuk membantu proses penarikan penarikan kesimpulan serta rekomendasi dari hasil visualisasi data.
+
+Skor: 80
+
+Komentar: Sejauh ini penerimaan materi sudah baik meskipun masih perlu improvement.
+
+===
+
+Introduction to Data Analytics and AI - Memberikan pemahaman mendasar kepada peserta mengenai peran Data Analitik dalam suatu organisasi, dan juga proses end-to-end data analisis. Begitu juga dengan memberikan pemahaman awal mengenai penggunaan perangkat AI untuk mengoptimalisasi pekerjaan.
+
+Skor: 60
+
+Komentar: Kurang memahami dengan baik apa itu Data Analytics
+
+===
+
+Introduction to Data Processing in Data Analytics using AI - Memberikan pemahaman mendasar kepada peserta mengenai proses awal pemrosesan data. Selain itu, bagaimana peserta bisa memanfaatkan perangkat AI untuk membantu proses ini
+
+Skor: 60
+
+Komentar: Belum terlalu memahami apa itu processing data dan pemanfaatannya dengan AI"

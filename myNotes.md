@@ -24,29 +24,17 @@
   6.  Miscellaneous
 1. 
 
+# export import js
+kalo yang di export dari file cuma satu kegunaan / fungsinya pake default -> biar jelas, konsisten
+   kalo yang di export banyak, pake named export (di importnya harus dibungkus tanda {} )
 
-# Tema
-## bagaimana mengembangkan potensi diri dalam berorganisasi dan pengalaman berorganisasi
 
- 
-1. potensi itu apa sih
-   1. potensi menurut..
-2. ayat ttg talenta
-   1. perumpamaan tentang talenta
-3. hubungannya dengan organisasi
-   1. hard skill & soft skill di cv
-   2. kemana talenta kita ingin dikembangkan? --> tujuan
-   3. butuh tempat yg tepat untuk mengembangkannya
-      1. timeline kuliah dari smt 1 - 8
-   4. foto" selama organisasi 
-4. perumpanaan naruto sasuke
-   1. sama" punya mentor (mentor == organisasi)
-   2. ikna sebagai permulaan / fam
-5. ketuklah
-
-peribaratan naruto sasuke
-
-Potential Issues:
-File Extensions (.mjs and .js):
-
-You are using .mjs extension for cofee.mjs, which indicates an ES module (ECMAScript Module).
+# important event in indonesia 2024 october - desember
+1. 28 oktober - hari sumpah pemuda
+2. 1 november - hari raya orang kudus
+3. 2 november - hari raya arwah
+4. 10 november - hari pahlawan
+5. 1 desember - world AIDS day
+6. 22 desember - hari ibu
+7. 1 desember - adven
+8. 25 desember - natal
