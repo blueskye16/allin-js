@@ -1,4 +1,4 @@
-import { API, sampleErrorData, sampleSuccessData } from './support.js';
+import { API, sampleErrorData, sampleSuccessData } from './fetch-support.js';
 
 /**
  * TODO:

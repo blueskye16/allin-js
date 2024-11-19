@@ -1,7 +1,7 @@
-import { rollDie } from "./tasks/rollDie.js";
-import { pickCard } from "./tasks/pickCard.js";
-import { generatePassword } from "./tasks/passwGenerator.js";
-import { generateLotteryNumbers } from "./tasks/lotteryNumbers.js";
+import { rollDie } from "./tasks-math-random/rollDie.js";
+import { pickCard } from "./tasks-math-random/pickCard.js";
+import { generatePassword } from "./tasks-math-random/passwGenerator.js";
+import { generateLotteryNumbers } from "./tasks-math-random/lotteryNumbers.js";
 
 /* 
 // Roll random dice number

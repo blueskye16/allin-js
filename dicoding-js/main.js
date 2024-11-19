@@ -1,56 +1,30 @@
-const sampleProducts = [
-  { id: 1, name: 'Laptop', category: 'Electronics', price: 1000 },
-  { id: 2, name: 'Phone', category: 'Electronics', price: 500 },
-  { id: 3, name: 'Shirt', category: 'Apparel', price: 50 },
-  { id: 4, name: 'Shoes', category: 'Apparel', price: 80 },
-  { id: 5, name: 'Watch', category: 'Accessories', price: 200 },
-];
+import { test } from 'node:test';
+import assert from 'node:assert';
+import { add } from './calculator.mjs';
 
-function getProductsByCategory(products, category) {
-  /**
-   * TODO:
-   * Gunakan metode array immutable untuk mengembalikan array produk yang termasuk dalam kategori yang diberikan.
-   */
-  return products.filter((product) => product.category === category);
-}
+test('should add correctly', () => {
+  // Arrange
+  const operandA = 1;
+  const operandB = 1;
 
-function findProductById(products, id) {
-  /**
-   * TODO:
-   * Gunakan metode array immutable untuk mengembalikan produk dengan ID yang cocok.
-   */
-  return products.find((product) => product.id === id);
-}
+  // Action
+  const actualValue = add(operandA, operandB);
 
-function calculateTotalPrice(products) {
-  /**
-   * TODO:
-   * Gunakan metode array immutable untuk menghitung total harga semua produk.
-   */
-  return products.reduce((total, product) => total + product.price, 0);
-}
+  // Assert
+  const expectedValue = 2;
+  assert.equal(actualValue, expectedValue);
+});
 
-function applyDiscount(products, discount) {
-  /**
-   * TODO:
-   * Gunakan metode array immutable untuk mengembalikan array baru,
-   * di mana setiap produk memiliki harga yang sudah dikurangi dengan diskon yang diberikan.
-   */
+test('should throw an error if string passed on numA parameter', () => {
+  const potentialErrorToBeThrew = () => {
+    // Arrange
+    const operandA = '5';
+    const operandB = 4;
 
-  return products.map((product) => {
-    let discountAmount = (discount / 100) * product.price;
-    let afterDiscount = product.price - discountAmount;
-    return { ...product, price: afterDiscount };
-  });
+    // Action
+    add(operandA, operandB);
+  };
 
-  // let discountAmount = (discount / 100) * products.price;
-  // let afterDiscount = products.price - discountAmount;
-  // return products.map(product => ({ ...product, price: afterDiscount }));
-
-  // return products.map(product => ({ ...product, price: product.price - discount }));
-}
-
-console.log(getProductsByCategory(sampleProducts, 'Electronics')); // Should return products with id 1 and 2
-console.log(calculateTotalPrice(sampleProducts)); // Should return 1830
-console.log(applyDiscount(sampleProducts, 10)); // Should return products with prices reduced by 10%
-console.log(findProductById(sampleProducts, 3)); // Should return the product with id 3
+  // Assert
+  assert.throws(potentialErrorToBeThrew, Error);
+});
