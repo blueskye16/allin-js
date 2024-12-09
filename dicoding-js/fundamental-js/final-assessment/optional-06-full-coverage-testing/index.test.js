@@ -1,4 +1,4 @@
-import {sum} from './index.js';
+import { sum } from './index.js';
 import { describe, it, expect } from 'bun:test';
 
 describe('Sum test', () => {
@@ -19,9 +19,23 @@ describe('Sum test', () => {
       const numB = 4;
 
       // Action
-      add(numA, numB);
+      sum(numA, numB);
     };
 
     expect(potentialErrorToBeThrew).toThrow(Error);
   });
-})
+
+  it('should throw an error if one of the data is a string', () => {
+    const potentialErrorToBeThrew = () => {
+      // Arrange
+      const numA = 1;
+      const numB = '4';
+
+      // Action
+      sum(numA, numB);
+    };
+
+    expect(potentialErrorToBeThrew).toThrow(Error);
+  });
+  
+});

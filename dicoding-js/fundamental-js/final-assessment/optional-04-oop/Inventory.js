@@ -7,8 +7,6 @@
  * - Memiliki method `listItems` untuk mengembalikan string yang merupakan informasi detail barang (dipanggil dari fungs `item.displayDetails()`).
  */
 
-import Item from './Item.js';
-
 class Inventory {
   constructor(items = []) {
     this.items = items;
@@ -23,15 +21,13 @@ class Inventory {
     if (index !== -1) {
       this.items.splice(index, 1);
     } else {
-      return `item id ${itemId} was not found`;
+      console.error(`Error: Item with ID ${itemId} not found.`);
     }
+    // } else {
+    //   return `item id ${itemId} was not found`;
+    // }
   }
 
-/*   listItems() {
-    return this.items.length > 0
-      ? `${this.items(this.displayDetails)}`
-      : `List item are empty.`;
-  } */
       listItems() {
         return this.items.length > 0
           ? this.items.map(item => item.displayDetails()).join('\n')

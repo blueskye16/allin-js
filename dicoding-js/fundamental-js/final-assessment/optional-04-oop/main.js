@@ -35,6 +35,11 @@ inventory.removeItem(2);
 console.log('\nInventory after removal:');
 console.log(inventory.listItems());
 
+console.log('\ntriying remove empty item')
+inventory.removeItem(2);
+console.log(inventory.listItems());
+
+
 /**
  * Output yang diharapkan:
  * Inventory after removal:

@@ -1,3 +1,7 @@
+# Dicoding
+- terakhir yang todo apps
+
+
 # JS Roadmap
 ## Fundamental
 
@@ -38,3 +42,4 @@ kalo yang di export dari file cuma satu kegunaan / fungsinya pake default -> bia
 6. 22 desember - hari ibu
 7. 1 desember - adven
 8. 25 desember - natal
+9. 
