@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookshelf App</title>
+
+    <!-- Impor script kamu di sini -->
+    <!-- Lampirkan `defer` jika pemanggilan dilakukan dalam <head> -->
+    <script defer src="main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-sans">
+    <header class="w-auto h-50 bg-violet-700 text-4xl text-zinc-200 p-5">
+      <h1 class="align-middle">Bookshelf App</h1>
+    </header>
+
+    <main class="w-4/5 m-auto bg-slate-200 my-5 px-10">
+      <section class="pb-10 shadow-inner-xl">
+        <h2 class="p-6 text-center text-xl sm:text-3xl font-semibold">
+          Tambah <span class="block sm:inline">Buku Baru</span>
+        </h2>
+        <form id="bookForm" data-testid="bookForm">
+          <!-- <div>
+            <label for="first_name" >First name</label>
+            <input type="text" id="first_name"  placeholder="John" required />
+        </div> -->
+          <div class="mb-2">
+            <label for="bookFormTitle" class="block mb-1 text-xl sm:text-2xl font-normal"
+              >Judul</label
+            >
+            <input
+              id="bookFormTitle"
+              type="text"
+              class="w-full h-14 rounded-lg bg-violet-200 border-2 border-violet-400"
+              required
+              data-testid="bookFormTitleInput"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="bookFormAuthor" class="block mb-1 text-xl sm:text-2xl font-normal"
+              >Penulis</label
+            >
+            <input
+              id="bookFormAuthor"
+              type="text"
+              class="w-full h-14 rounded-lg bg-violet-200 border-2 border-violet-400"
+              required
+              data-testid="bookFormAuthorInput"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="bookFormYear" class="block mb-1 text-xl sm:text-2xl font-normal"
+              >Tahun</label
+            >
+            <input
+              id="bookFormYear"
+              type="number"
+              class="w-full h-14 rounded-lg bg-violet-200 border-2 border-violet-400"
+              required
+              data-testid="bookFormYearInput"
+            />
+          </div>
+          <div class="mt-5 mb-2">
+            <label for="bookFormIsComplete">Selesai dibaca</label>
+            <input
+              id="bookFormIsComplete"
+              type="checkbox"
+              data-testid="bookFormIsCompleteCheckbox"
+              class="ml-2"
+            />
+          </div>
+          <button
+            id="bookFormSubmit"
+            type="submit"
+            data-testid="bookFormSubmitButton"
+            class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+          >
+            Masukkan <span class="inline-block">Buku ke rak</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="mt-5">
+        <form id="searchBook" data-testid="searchBookForm" class="flex">
+          <label
+            for="searchBookTitle"
+            class="relative text-xl sm:text-3xl top-8 mr-4"
+            >Judul</label
+          >
+          <div class="relative w-full">
+            <h2 class="text-md pb-1">Cari Buku</h2>
+            <input
+              id="searchBookTitle"
+              type="text"
+              data-testid="searchBookFormTitleInput"
+              class="block w-full sm:p-3 text-sm text-gray-900 border-2 border-violet-400 rounded-lg bg-violet-200 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <button
+              id="searchSubmit"
+              type="submit"
+              data-testid="searchBookFormSubmitButton"
+              class="absolute end-0.5 bottom-0.5 px-2 sm:px-4 py-1.5 sm:py-2.5 bg-purple-700 rounded-lg hover:bg-purple-800 text-sm text-white font-medium flex"
+            >
+              <i data-feather="search" class="p-1 sm:pr-2 relative bottom-0.5"></i>
+              <span class="hidden sm:inline">Cari</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="mt-12">
+        <h2 class="text-lg sm:text-2xl mb-2">Belum selesai dibaca</h2>
+
+        <div
+          id="incompleteBookList"
+          data-testid="incompleteBookList"
+          class="bg-slate-300 rounded-lg p-5 h-auto"
+        >
+          <!-- 
+            Ini adalah struktur HTML untuk masing-masing buku.
+            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
+          -->
+          <div
+            data-bookid="123123123"
+            data-testid="bookItem"
+            class="sm:grid sm:grid-cols-2 gap-1"
+          >
+            <h3 data-testid="bookItemTitle" class="sm:col-start-1 text-sm">
+              Judul Buku 1
+            </h3>
+            <p data-testid="bookItemAuthor" class="sm:col-start-1 text-sm">
+              Penulis: Penulis Buku 1
+            </p>
+            <p data-testid="bookItemYear" class="sm:col-start-1 text-sm">
+              Tahun: 2030
+            </p>
+            <div
+              class="grid grid-cols-2 mt-2 w-full gap-2 sm:grid-rows-3 sm:place-items-end sm:col-start-2 sm:row-start-1 sm:row-span-3"
+            >
+              <button
+                data-testid="bookItemIsCompleteButton"
+                class="col-span-2 text-center p-1 text-sm rounded-md focus:outline-none text-white bg-green-500 w-full"
+              >
+                Selesai dibaca
+              </button>
+              <button
+                data-testid="bookItemDeleteButton"
+                class="text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-red-500 w-full"
+              >
+                Hapus
+              </button>
+              <button
+                data-testid="bookItemEditButton"
+                class="text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-yellow-500 w-full"
+              >
+                Edit
+              </button>
+            </div>
+            <!-- <button
+            id="bookFormSubmit"
+            type="submit"
+            data-testid="bookFormSubmitButton"
+            class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+          >
+            Masukkan Buku ke rak
+          </button> -->
+            <!-- <div class="flex flex-col items-end col-start-2 row-start-1 row-span-3">
+              <button data-testid="bookItemIsCompleteButton" class="">
+                Selesai dibaca
+              </button>
+              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+              <button data-testid="bookItemEditButton">Edit Buku</button>
+            </div> -->
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-10">
+        <h2>Selesai dibaca</h2>
+
+        <div id="completeBookList" data-testid="completeBookList">
+          <!-- 
+            Ini adalah struktur HTML untuk masing-masing buku.
+            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
+          -->
+          <div data-bookid="456456456" data-testid="bookItem">
+            <h3 data-testid="bookItemTitle">Judul Buku 2</h3>
+            <p data-testid="bookItemAuthor">Penulis: Penulis Buku 2</p>
+            <p data-testid="bookItemYear">Tahun: 2030</p>
+            <div>
+              <button data-testid="bookItemIsCompleteButton">
+                Selesai dibaca
+              </button>
+              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+              <button data-testid="bookItemEditButton">Edit Buku</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>
