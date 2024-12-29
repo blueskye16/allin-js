@@ -18,6 +18,7 @@
       <h1 class="align-middle">Bookshelf App</h1>
     </header>
 
+    <!-- delete notification -->
     <div
       id="deleteAlert"
       class="flex items-center p-4 mb-4 text-orange-800 rounded-lg bg-orange-50 sticky top-0 z-10 hidden"
@@ -66,7 +67,7 @@
       </button>
     </div>
 
-    <main class="w-4/5 m-auto px-10 mb-10">
+    <main class="w-full sm:w-4/5 m-auto px-10 mb-10">
       <section
         class="pb-10 shadow-inner-xl bg-indigo-50 px-5 mt-5 rounded-lg drop-shadow-md"
       >
@@ -167,7 +168,7 @@
         </form>
       </section>
 
-      <section id="bookList">
+      <!--       <section id="bookList">
         <div class="mt-12 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
           <h2 class="text-md sm:text-lg font-semibold sm:text-2xl mb-2">
             Belum selesai dibaca
@@ -180,9 +181,9 @@
           </h2>
           <div id="completeBookList" data-testid="completeBookList"></div>
         </div>
-      </section>
+      </section> -->
 
-      <!--       <section class="mt-12 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
+      <section class="mt-12 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
         <h2 class="text-md sm:text-lg font-semibold sm:text-2xl mb-2">
           Belum selesai dibaca
         </h2>
@@ -194,7 +195,7 @@
           Selesai dibaca
         </h2>
         <div id="completeBookList" data-testid="completeBookList"></div>
-      </section> -->
+      </section>
     </main>
     <script>
       feather.replace();
