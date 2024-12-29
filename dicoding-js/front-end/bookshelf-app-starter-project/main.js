@@ -41,10 +41,17 @@ function searchBooks() {
   const searchInput = document
     .getElementById('searchBookTitle')
     .value.toLowerCase();
+  const btnClearSearchInput = document.getElementById('clearSearch');
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchInput)
   );
   renderBooks(filteredBooks);
+
+  btnClearSearchInput.classList.remove('hidden')
+}
+
+function clearInput() {
+  document.getElementById('searchBookTitle').value = '';
 }
 
 function renderBooks(bookList = books) {
@@ -238,43 +245,6 @@ function findBook(bookId) {
   return null;
 }
 
-// Function to edit a book
-function editBook(bookId) {
-  const bookToEdit = books.find((book) => book.id === bookId);
-  if (!bookToEdit) return;
-
-  // Create a form/modal to edit the book
-  const editForm = document.createElement('div');
-  editForm.classList.add('edit-form');
-
-  editForm.innerHTML = `
-    <h3>Edit Book</h3>
-    <label>Title: <input type="text" id="editTitle" value="${bookToEdit.title}" /></label>
-    <label>Author: <input type="text" id="editAuthor" value="${bookToEdit.author}" /></label>
-    <label>Year: <input type="number" id="editYear" value="${bookToEdit.year}" /></label>
-    <button id="saveEditButton">Save</button>
-    <button id="cancelEditButton">Cancel</button>
-  `;
-
-  document.body.append(editForm);
-
-  // Handle save button click
-  document.getElementById('saveEditButton').addEventListener('click', () => {
-    bookToEdit.title = document.getElementById('editTitle').value;
-    bookToEdit.author = document.getElementById('editAuthor').value;
-    bookToEdit.year = document.getElementById('editYear').value;
-
-    // Re-render books and remove the edit form
-    renderBooks();
-    editForm.remove();
-  });
-
-  // Handle cancel button click
-  document.getElementById('cancelEditButton').addEventListener('click', () => {
-    editForm.remove();
-  });
-}
-
 function deleteBook(bookId) {
   const bookTarget = findBookIndex(bookId);
 
@@ -284,17 +254,6 @@ function deleteBook(bookId) {
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
-
-/* 
-// Function to delete a book
-function deleteBook(bookId) {
-  const bookIndex = books.findIndex((book) => book.id === bookId);
-  if (bookIndex === -1) return;
-
-  books.splice(bookIndex, 1);
-  renderBooks();
-}
-*/
 
 function findBookIndex(bookId) {
   for (const index in books) {
