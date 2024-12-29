@@ -7,7 +7,7 @@
 
     <!-- Impor script kamu di sini -->
     <!-- Lampirkan `defer` jika pemanggilan dilakukan dalam <head> -->
-    <script defer src="main.js"></script>
+    <script defer src="gas.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <link
@@ -31,7 +31,9 @@
             <input type="text" id="first_name"  placeholder="John" required />
         </div> -->
           <div class="mb-2">
-            <label for="bookFormTitle" class="block mb-1 text-xl sm:text-2xl font-normal"
+            <label
+              for="bookFormTitle"
+              class="block mb-1 text-xl sm:text-2xl font-normal"
               >Judul</label
             >
             <input
@@ -43,7 +45,9 @@
             />
           </div>
           <div class="mb-2">
-            <label for="bookFormAuthor" class="block mb-1 text-xl sm:text-2xl font-normal"
+            <label
+              for="bookFormAuthor"
+              class="block mb-1 text-xl sm:text-2xl font-normal"
               >Penulis</label
             >
             <input
@@ -55,7 +59,9 @@
             />
           </div>
           <div class="mb-2">
-            <label for="bookFormYear" class="block mb-1 text-xl sm:text-2xl font-normal"
+            <label
+              for="bookFormYear"
+              class="block mb-1 text-xl sm:text-2xl font-normal"
               >Tahun</label
             >
             <input
@@ -107,7 +113,10 @@
               data-testid="searchBookFormSubmitButton"
               class="absolute end-0.5 bottom-0.5 px-2 sm:px-4 py-1.5 sm:py-2.5 bg-purple-700 rounded-lg hover:bg-purple-800 text-sm text-white font-medium flex"
             >
-              <i data-feather="search" class="p-1 sm:pr-2 relative bottom-0.5"></i>
+              <i
+                data-feather="search"
+                class="p-1 sm:pr-2 relative bottom-0.5"
+              ></i>
               <span class="hidden sm:inline">Cari</span>
             </button>
           </div>
@@ -115,12 +124,12 @@
       </section>
 
       <section class="mt-12">
-        <h2 class="text-lg sm:text-2xl mb-2">Belum selesai dibaca</h2>
+        <h2 class="text-lg font-semibold sm:text-2xl mb-2">Belum selesai dibaca</h2>
 
         <div
           id="incompleteBookList"
           data-testid="incompleteBookList"
-          class="bg-slate-300 rounded-lg p-5 h-auto"
+          class="bg-slate-300 rounded-xl p-3 h-auto"
         >
           <!-- 
             Ini adalah struktur HTML untuk masing-masing buku.
@@ -129,15 +138,15 @@
           <div
             data-bookid="123123123"
             data-testid="bookItem"
-            class="sm:grid sm:grid-cols-2 gap-1"
+            class="sm:grid sm:grid-cols-2 gap-1 content-center my-2 bg-slate-200 p-3 rounded-lg"
           >
-            <h3 data-testid="bookItemTitle" class="sm:col-start-1 text-sm">
+            <h3 data-testid="bookItemTitle" class="sm:col-start-1 text-xl font-medium">
               Judul Buku 1
             </h3>
-            <p data-testid="bookItemAuthor" class="sm:col-start-1 text-sm">
+            <p data-testid="bookItemAuthor" class="sm:col-start-1">
               Penulis: Penulis Buku 1
             </p>
-            <p data-testid="bookItemYear" class="sm:col-start-1 text-sm">
+            <p data-testid="bookItemYear" class="sm:col-start-1">
               Tahun: 2030
             </p>
             <div
@@ -145,19 +154,19 @@
             >
               <button
                 data-testid="bookItemIsCompleteButton"
-                class="col-span-2 sm:col-span-1 text-center p-1 text-sm rounded-md focus:outline-none text-white bg-green-500 w-full"
+                class="col-span-2 sm:col-span-1 sm:col-start-2 text-center p-1 text-sm rounded-md focus:outline-none text-white bg-green-500 w-full"
               >
                 Selesai dibaca
               </button>
               <button
                 data-testid="bookItemDeleteButton"
-                class="sm:row-start-2 text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-red-500 w-full"
+                class="sm:row-start-2 sm:col-start-2 text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-red-500 w-full"
               >
                 Hapus
               </button>
               <button
                 data-testid="bookItemEditButton"
-                class="sm:row-start-3 text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-yellow-500 w-full"
+                class="sm:row-start-3 sm:col-start-2 text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-yellow-500 w-full"
               >
                 Edit
               </button>
