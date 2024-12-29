@@ -81,14 +81,19 @@ function makeBook(bookObject) {
   const textTitle = document.createElement('h3');
   textTitle.innerText = `Judul Buku: ${bookObject.title}`;
   textTitle.classList.add('sm:col-start-1', 'text-xl', 'font-medium');
+  textTitle.setAttribute('data-testid', 'bookItemTitle');
 
   const textAuthor = document.createElement('p');
   textAuthor.innerText = `Penulis: ${bookObject.author}`;
-  textTitle.classList.add('sm:col-start-1');
+  textAuthor.classList.add('sm:col-start-1');
+  textAuthor.setAttribute('data-testid', 'bookItemAuthor');
+
 
   const textYear = document.createElement('p');
   textYear.innerText = `Tahun: ${bookObject.year}`;
-  textTitle.classList.add('sm:col-start-1');
+  textYear.classList.add('sm:col-start-1');
+  textYear.setAttribute('data-testid', 'bookItemYear');
+
 
   const btnContainer = document.createElement('div');
   btnContainer.classList.add(...btnContainerClass);
@@ -135,7 +140,7 @@ function makeBook(bookObject) {
     'p-3',
     'bg-stone-200',
     'my-4',
-    'rounded-lg'
+    'rounded-lg',
   );
   container.setAttribute('data-bookid', `book-${bookObject.id}`);
   container.setAttribute('data-testid', 'bookItem');
@@ -249,6 +254,8 @@ function saveData() {
     document.dispatchEvent(new Event(SAVED_EVENT));
   }
 }
+
+// storage
 
 const SAVED_EVENT = 'saved-book';
 const STORAGE_KEY = 'BOOK_APPS';

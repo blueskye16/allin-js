@@ -167,7 +167,22 @@
         </form>
       </section>
 
-      <section class="mt-12 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
+      <section id="bookList">
+        <div class="mt-12 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
+          <h2 class="text-md sm:text-lg font-semibold sm:text-2xl mb-2">
+            Belum selesai dibaca
+          </h2>
+          <div id="incompleteBookList" data-testid="incompleteBookList"></div>
+        </div>
+        <div class="mt-6 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
+          <h2 class="text-md sm:text-lg font-semibold sm:text-2xl mb-2">
+            Selesai dibaca
+          </h2>
+          <div id="completeBookList" data-testid="completeBookList"></div>
+        </div>
+      </section>
+
+      <!--       <section class="mt-12 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
         <h2 class="text-md sm:text-lg font-semibold sm:text-2xl mb-2">
           Belum selesai dibaca
         </h2>
@@ -179,7 +194,7 @@
           Selesai dibaca
         </h2>
         <div id="completeBookList" data-testid="completeBookList"></div>
-      </section>
+      </section> -->
     </main>
     <script>
       feather.replace();
