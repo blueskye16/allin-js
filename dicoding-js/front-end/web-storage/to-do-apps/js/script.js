@@ -139,27 +139,6 @@ function undoTaskFromCompleted(todoId) {
   saveData();
 }
 
-/* document.addEventListener(RENDER_EVENT, function () {
-  // console.log(todos);
-  // const uncompletedTODOList = document.getElementById('todos');
-  // uncompletedTODOList.innerHTML = '';
-
-  // for (const todoItem of todos) {
-  //   const todoElement = makeTodo(todoItem);
-  //   uncompletedTODOList.append(todoElement);
-  //   console.log(todoItem);
-  // }
-  const uncompletedTODOList = document.getElementById('todos');
-  uncompletedTODOList.innerHTML = '';
-
-  for (const todoItem of todos) {
-    const todoElement = makeTodo(todoItem);
-    if (!todoItem.isCompleted) {
-      uncompletedTODOList.append(todoElement);
-    }
-  }
-}); */
-
 document.addEventListener(RENDER_EVENT, function () {
   const uncompletedTODOList = document.getElementById('todos');
   uncompletedTODOList.innerHTML = '';

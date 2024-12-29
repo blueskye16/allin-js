@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bookshelf App</title>
 
-    <!-- Impor script kamu di sini -->
-    <!-- Lampirkan `defer` jika pemanggilan dilakukan dalam <head> -->
     <script defer src="gas.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -20,16 +18,62 @@
       <h1 class="align-middle">Bookshelf App</h1>
     </header>
 
-    <main class="w-4/5 m-auto bg-slate-200 my-5 px-10">
-      <section class="pb-10 shadow-inner-xl">
+    <div
+      id="deleteAlert"
+      class="flex items-center p-4 mb-4 text-orange-800 rounded-lg bg-orange-50 sticky top-0 z-10 hidden"
+      role="alert"
+    >
+      <div
+        class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-200 rounded-lg"
+      >
+        <svg
+          class="w-5 h-5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"
+          />
+        </svg>
+        <span class="sr-only">Error icon</span>
+      </div>
+      <div class="ms-3 text-sm font-medium">Buku berhasil dihapus!</div>
+      <button
+        type="button"
+        class="ms-auto -mx-1.5 -my-1.5 bg-red-300 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-400 hover:text-white inline-flex items-center justify-center h-8 w-8"
+        data-dismiss-target="#alert-1"
+        aria-label="Close"
+        id="btnDeleteAlert"
+      >
+        <span class="sr-only">Close</span>
+        <svg
+          class="w-3 h-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <main class="w-4/5 m-auto px-10 mb-10">
+      <section
+        class="pb-10 shadow-inner-xl bg-indigo-50 px-5 mt-5 rounded-lg drop-shadow-md"
+      >
         <h2 class="p-6 text-center text-xl sm:text-3xl font-semibold">
           Tambah <span class="block sm:inline">Buku Baru</span>
         </h2>
         <form id="bookForm" data-testid="bookForm">
-          <!-- <div>
-            <label for="first_name" >First name</label>
-            <input type="text" id="first_name"  placeholder="John" required />
-        </div> -->
           <div class="mb-2">
             <label
               for="bookFormTitle"
@@ -92,11 +136,11 @@
         </form>
       </section>
 
-      <section class="mt-5">
+      <section class="mt-5 bg-slate-100 px-3 py-6 rounded-lg drop-shadow-md">
         <form id="searchBook" data-testid="searchBookForm" class="flex">
           <label
             for="searchBookTitle"
-            class="relative text-xl sm:text-3xl top-8 mr-4"
+            class="relative z-0 text-xl sm:text-3xl top-8 mr-4"
             >Judul</label
           >
           <div class="relative w-full">
@@ -123,94 +167,18 @@
         </form>
       </section>
 
-      <section class="mt-12">
-        <h2 class="text-lg font-semibold sm:text-2xl mb-2">Belum selesai dibaca</h2>
-
-        <div
-          id="incompleteBookList"
-          data-testid="incompleteBookList"
-          class="bg-slate-300 rounded-xl p-3 h-auto"
-        >
-          <!-- 
-            Ini adalah struktur HTML untuk masing-masing buku.
-            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
-          -->
-          <div
-            data-bookid="123123123"
-            data-testid="bookItem"
-            class="sm:grid sm:grid-cols-2 gap-1 content-center my-2 bg-slate-200 p-3 rounded-lg"
-          >
-            <h3 data-testid="bookItemTitle" class="sm:col-start-1 text-xl font-medium">
-              Judul Buku 1
-            </h3>
-            <p data-testid="bookItemAuthor" class="sm:col-start-1">
-              Penulis: Penulis Buku 1
-            </p>
-            <p data-testid="bookItemYear" class="sm:col-start-1">
-              Tahun: 2030
-            </p>
-            <div
-              class="grid grid-cols-2 mt-2 w-full gap-2 sm:grid-rows-3 sm:place-items-end sm:col-start-2 sm:row-start-1 sm:row-span-3"
-            >
-              <button
-                data-testid="bookItemIsCompleteButton"
-                class="col-span-2 sm:col-span-1 sm:col-start-2 text-center p-1 text-sm rounded-md focus:outline-none text-white bg-green-500 w-full"
-              >
-                Selesai dibaca
-              </button>
-              <button
-                data-testid="bookItemDeleteButton"
-                class="sm:row-start-2 sm:col-start-2 text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-red-500 w-full"
-              >
-                Hapus
-              </button>
-              <button
-                data-testid="bookItemEditButton"
-                class="sm:row-start-3 sm:col-start-2 text-center text-sm p-1 text-sm rounded-md focus:outline-none text-white bg-yellow-500 w-full"
-              >
-                Edit
-              </button>
-            </div>
-            <!-- <button
-            id="bookFormSubmit"
-            type="submit"
-            data-testid="bookFormSubmitButton"
-            class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
-          >
-            Masukkan Buku ke rak
-          </button> -->
-            <!-- <div class="flex flex-col items-end col-start-2 row-start-1 row-span-3">
-              <button data-testid="bookItemIsCompleteButton" class="">
-                Selesai dibaca
-              </button>
-              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
-              <button data-testid="bookItemEditButton">Edit Buku</button>
-            </div> -->
-          </div>
-        </div>
+      <section class="mt-12 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
+        <h2 class="text-md sm:text-lg font-semibold sm:text-2xl mb-2">
+          Belum selesai dibaca
+        </h2>
+        <div id="incompleteBookList" data-testid="incompleteBookList"></div>
       </section>
 
-      <section class="mt-10">
-        <h2>Selesai dibaca</h2>
-
-        <div id="completeBookList" data-testid="completeBookList">
-          <!-- 
-            Ini adalah struktur HTML untuk masing-masing buku.
-            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
-          -->
-          <div data-bookid="456456456" data-testid="bookItem">
-            <h3 data-testid="bookItemTitle">Judul Buku 2</h3>
-            <p data-testid="bookItemAuthor">Penulis: Penulis Buku 2</p>
-            <p data-testid="bookItemYear">Tahun: 2030</p>
-            <div>
-              <button data-testid="bookItemIsCompleteButton">
-                Selesai dibaca
-              </button>
-              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
-              <button data-testid="bookItemEditButton">Edit Buku</button>
-            </div>
-          </div>
-        </div>
+      <section class="mt-6 bg-stone-100 rounded-xl p-3 h-auto drop-shadow-lg">
+        <h2 class="text-md sm:text-lg font-semibold sm:text-2xl mb-2">
+          Selesai dibaca
+        </h2>
+        <div id="completeBookList" data-testid="completeBookList"></div>
       </section>
     </main>
     <script>
