@@ -140,6 +140,7 @@ function makeBook(bookObject) {
     'hover:bg-yellow-700'
   );
 
+  editBtn.setAttribute('data-testid', 'bookItemEditButton')
   editBtn.addEventListener('click', function () {
     editBook(bookObject.id);
   });
@@ -153,6 +154,7 @@ function makeBook(bookObject) {
     'hover:bg-red-600'
   );
 
+  deleteBtn.setAttribute('data-testid', 'bookItemDeleteButton');
   const deleteBookNotification = document.getElementById('deleteAlert');
   const btnDeleteBookNotification = document.getElementById('btnDeleteAlert');
 
@@ -189,6 +191,7 @@ function makeBook(bookObject) {
       'hover:bg-orange-700'
     );
 
+    undoBtn.setAttribute('data-testid', 'bookItemCompleteButton');
     undoBtn.addEventListener('click', function () {
       undoBookFromCompleted(bookObject.id);
     });
@@ -205,6 +208,7 @@ function makeBook(bookObject) {
       'hover:bg-green-600'
     );
 
+    doneBtn.setAttribute('data-testid', 'bookItemCompleteButton');
     doneBtn.addEventListener('click', function () {
       addBookToCompleted(bookObject.id);
     });
