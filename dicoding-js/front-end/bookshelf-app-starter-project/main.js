@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
   submitForm.addEventListener('submit', function (event) {
     event.preventDefault();
     addBook();
+    // const { doneContainerElement: alertContainer, btnCloseDoneAlert: closeButton } = getDoneAlert();
+    const doneAlert = getDoneAlert();
+    doneAlert.btnCloseDoneAlert.addEventListener('click', function () {
+      doneAlert.doneContainerElement.classList.add('hidden');
+    });
   });
   const searchForm = document.getElementById('searchBook');
   searchForm.addEventListener('submit', function (event) {
@@ -17,24 +22,62 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+function getBookDetailsFromForm() {
+  return {
+    titleElement: document.getElementById('bookFormTitle'),
+    authorElement: document.getElementById('bookFormAuthor'),
+    yearElement: document.getElementById('bookFormYear'),
+  };
+}
+
+function getDoneAlert() {
+  return {
+    doneContainerElement: document.getElementById('doneAlert'),
+    btnCloseDoneAlert: document.getElementById('btnCloseDoneAlert'),
+  };
+}
+
 function addBook() {
-  const textTitle = document.getElementById('bookFormTitle').value;
-  const textAuthor = document.getElementById('bookFormAuthor').value;
-  const textYear = document.getElementById('bookFormYear').value;
+  const { titleElement, authorElement, yearElement } = getBookDetailsFromForm();
 
   const generatedID = generateId();
   const checkState = bookFormCheckState();
   const bookObject = generateBookObject(
     generatedID,
-    textTitle,
-    textAuthor,
-    textYear,
+    titleElement.value,
+    authorElement.value,
+    parseInt(yearElement.value),
     checkState
   );
+
   books.push(bookObject);
 
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
+
+  clearFormInput();
+}
+
+function generateBookObject(id, title, author, year, isComplete) {
+  return {
+    id,
+    title,
+    author,
+    year,
+    isComplete,
+  };
+}
+
+function clearFormInput() {
+  const { titleElement, authorElement, yearElement } = getBookDetailsFromForm();
+  const doneAlert = document.getElementById('doneAlert');
+
+  titleElement.value = '';
+  authorElement.value = '';
+  yearElement.value = '';
+  document.getElementById('bookFormIsComplete').checked = false;
+
+  doneAlert.classList.remove('hidden');
 }
 
 function searchBooks() {
@@ -47,7 +90,7 @@ function searchBooks() {
   );
   renderBooks(filteredBooks);
 
-  btnClearSearchInput.classList.remove('hidden')
+  btnClearSearchInput.classList.remove('hidden');
 }
 
 function clearInput() {
@@ -63,7 +106,7 @@ function renderBooks(bookList = books) {
 
   for (const bookItem of bookList) {
     const bookElement = makeBook(bookItem);
-    if (!bookItem.isCompleted) {
+    if (!bookItem.isComplete) {
       incompleteBookList.append(bookElement);
     } else {
       completeBookList.append(bookElement);
@@ -77,16 +120,6 @@ function generateId() {
 
 function bookFormCheckState() {
   return document.getElementById('bookFormIsComplete').checked;
-}
-
-function generateBookObject(id, title, author, year, isCompleted) {
-  return {
-    id,
-    title,
-    author,
-    year,
-    isCompleted,
-  };
 }
 
 function makeBook(bookObject) {
@@ -140,7 +173,7 @@ function makeBook(bookObject) {
     'hover:bg-yellow-700'
   );
 
-  editBtn.setAttribute('data-testid', 'bookItemEditButton')
+  editBtn.setAttribute('data-testid', 'bookItemEditButton');
   editBtn.addEventListener('click', function () {
     editBook(bookObject.id);
   });
@@ -156,7 +189,9 @@ function makeBook(bookObject) {
 
   deleteBtn.setAttribute('data-testid', 'bookItemDeleteButton');
   const deleteBookNotification = document.getElementById('deleteAlert');
-  const btnDeleteBookNotification = document.getElementById('btnDeleteAlert');
+  const btnDeleteBookNotification = document.getElementById(
+    'btnCloseDeleteAlert'
+  );
 
   btnDeleteBookNotification.addEventListener('click', function () {
     deleteBookNotification.classList.add('hidden');
@@ -180,7 +215,7 @@ function makeBook(bookObject) {
   container.setAttribute('data-bookid', `book-${bookObject.id}`);
   container.setAttribute('data-testid', 'bookItem');
 
-  if (bookObject.isCompleted) {
+  if (bookObject.isComplete) {
     const undoBtn = document.createElement('button');
     undoBtn.innerText = 'Belum Selesai dibaca';
     undoBtn.classList.add(
@@ -191,7 +226,7 @@ function makeBook(bookObject) {
       'hover:bg-orange-700'
     );
 
-    undoBtn.setAttribute('data-testid', 'bookItemCompleteButton');
+    undoBtn.setAttribute('data-testid', 'bookItemIsCompleteButton');
     undoBtn.addEventListener('click', function () {
       undoBookFromCompleted(bookObject.id);
     });
@@ -208,7 +243,7 @@ function makeBook(bookObject) {
       'hover:bg-green-600'
     );
 
-    doneBtn.setAttribute('data-testid', 'bookItemCompleteButton');
+    doneBtn.setAttribute('data-testid', 'bookItemIsCompleteButton');
     doneBtn.addEventListener('click', function () {
       addBookToCompleted(bookObject.id);
     });
@@ -225,7 +260,7 @@ function addBookToCompleted(bookId) {
 
   if (bookTarget == null) return;
 
-  bookTarget.isCompleted = true;
+  bookTarget.isComplete = true;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
@@ -235,7 +270,7 @@ function undoBookFromCompleted(bookId) {
 
   if (bookTarget == null) return;
 
-  bookTarget.isCompleted = false;
+  bookTarget.isComplete = false;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
@@ -273,20 +308,6 @@ document.addEventListener(RENDER_EVENT, function () {
   console.log(books);
   renderBooks();
 });
-/* document.addEventListener(RENDER_EVENT, function () {
-  console.log(books);
-  const incompleteBookList = document.getElementById('incompleteBookList');
-  incompleteBookList.innerHTML = '';
-
-  const completeBookList = document.getElementById('completeBookList');
-  completeBookList.innerHTML = '';
-
-  for (const bookItem of books) {
-    const bookElement = makeBook(bookItem);
-    if (!bookItem.isCompleted) incompleteBookList.append(bookElement);
-    else completeBookList.append(bookElement);
-  }
-}); */
 
 function saveData() {
   if (isStorageExist()) {
@@ -295,8 +316,6 @@ function saveData() {
     document.dispatchEvent(new Event(SAVED_EVENT));
   }
 }
-
-// storage
 
 const SAVED_EVENT = 'saved-book';
 const STORAGE_KEY = 'BOOK_APPS';
