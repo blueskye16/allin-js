@@ -2,6 +2,7 @@ const books = [];
 const RENDER_EVENT = 'render-book';
 
 document.addEventListener('DOMContentLoaded', function () {
+  checkBookContainers();
   const submitForm = document.getElementById('bookForm');
   submitForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -20,7 +21,66 @@ document.addEventListener('DOMContentLoaded', function () {
   if (isStorageExist()) {
     loadDataFromStorage();
   }
+  // Periksa list buku kosong saat halaman pertama kali dimuat
+  document.addEventListener(RENDER_EVENT, checkBookContainers);
+  document.dispatchEvent(new Event(RENDER_EVENT));
 });
+
+// Fungsi untuk memeriksa apakah list buku kosong
+function checkBookContainers() {
+  const incompleteBookList = document.getElementById('incompleteBookList');
+  const completeBookList = document.getElementById('completeBookList');
+
+  // Hapus pesan kosong jika ada perubahan dalam kontainer
+  const emptyMessages = document.querySelectorAll('.empty-message');
+  emptyMessages.forEach((message) => message.remove());
+
+  // Periksa apakah kontainer "Belum selesai dibaca" kosong
+  if (incompleteBookList.children.length === 0) {
+    const emptyMessage = document.createElement('p');
+    emptyMessage.classList.add('empty-message', 'text-gray-500', 'text-center');
+    emptyMessage.innerText = 'Buku belum ditambahkan';
+    incompleteBookList.append(emptyMessage);
+  }
+
+  // Periksa apakah kontainer "Selesai dibaca" kosong
+  if (completeBookList && completeBookList.children.length === 0) {
+    const emptyMessage = document.createElement('p');
+    emptyMessage.classList.add('empty-message', 'text-gray-500', 'text-center');
+    emptyMessage.innerText = 'Buku belum ditambahkan';
+    completeBookList.append(emptyMessage);
+  }
+}
+
+/* // function buat ngecek list buku kosong apa engga
+function checkBookContainers() {
+  const incompleteBookList = document.getElementById('incompleteBookList');
+  const completeBookList = document.getElementById('completeBookList');
+
+  const emptyBookList = document.createElement('p');
+  emptyBookList.innerText = 'Buku belum ditambahkan';
+
+  // Periksa kontainer incompleteBookList
+  if (incompleteBookList.children.length === 0) {
+    // incompleteBookList.innerHTML = `
+    //   <p class="text-gray-500 text-center">Buku belum ditambahkan</p>
+    // `;
+    incompleteBookList.append(emptyBookList);
+  }
+
+  // Periksa kontainer completeBookList
+  if (completeBookList.children.length === 0) {
+    // completeBookList.innerHTML = `
+    //   <p class="text-gray-500 text-center">Buku belum ditambahkan</p>
+    // `;
+    completeBookList.append(emptyBookList);
+  }
+  // document.addEventListener(RENDER_EVENT, checkBookContainers);
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
+// Panggil fungsi ini setiap kali daftar buku diperbarui
+// document.addEventListener(RENDER_EVENT, checkBookContainers);
+ */
 
 function getBookDetailsFromForm() {
   return {
@@ -55,7 +115,7 @@ function addBook() {
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 
-  clearFormInput();
+  doneAlert();
 }
 
 function generateBookObject(id, title, author, year, isComplete) {
@@ -68,15 +128,11 @@ function generateBookObject(id, title, author, year, isComplete) {
   };
 }
 
-function clearFormInput() {
-  const { titleElement, authorElement, yearElement } = getBookDetailsFromForm();
+function doneAlert() {
   const doneAlert = document.getElementById('doneAlert');
+  const submitForm = document.getElementById('bookForm');
 
-  titleElement.value = '';
-  authorElement.value = '';
-  yearElement.value = '';
-  document.getElementById('bookFormIsComplete').checked = false;
-
+  submitForm.reset();
   doneAlert.classList.remove('hidden');
 }
 
@@ -228,7 +284,7 @@ function makeBook(bookObject) {
 
     undoBtn.setAttribute('data-testid', 'bookItemIsCompleteButton');
     undoBtn.addEventListener('click', function () {
-      undoBookFromCompleted(bookObject.id);
+      toggleIsComplete(bookObject.id);
     });
 
     btnContainer.append(undoBtn, deleteBtn, editBtn);
@@ -245,7 +301,7 @@ function makeBook(bookObject) {
 
     doneBtn.setAttribute('data-testid', 'bookItemIsCompleteButton');
     doneBtn.addEventListener('click', function () {
-      addBookToCompleted(bookObject.id);
+      toggleIsComplete(bookObject.id);
     });
 
     btnContainer.append(doneBtn, deleteBtn, editBtn);
@@ -255,22 +311,12 @@ function makeBook(bookObject) {
   return container;
 }
 
-function addBookToCompleted(bookId) {
+function toggleIsComplete(bookId) {
   const bookTarget = findBook(bookId);
 
   if (bookTarget == null) return;
 
-  bookTarget.isComplete = true;
-  document.dispatchEvent(new Event(RENDER_EVENT));
-  saveData();
-}
-
-function undoBookFromCompleted(bookId) {
-  const bookTarget = findBook(bookId);
-
-  if (bookTarget == null) return;
-
-  bookTarget.isComplete = false;
+  bookTarget.isComplete = !bookTarget.isComplete;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
