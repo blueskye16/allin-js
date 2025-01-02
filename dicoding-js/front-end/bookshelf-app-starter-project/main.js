@@ -248,7 +248,7 @@ function makeBook(bookObject) {
       addBookToCompleted(bookObject.id);
     });
 
-    btnContainer.append(doneBtn);
+    btnContainer.append(doneBtn, deleteBtn, editBtn);
   }
 
   container.append(textTitle, textAuthor, textYear, btnContainer);
