@@ -10,6 +10,7 @@ function ContactItem({ imageUrl, name, tag, id, onDelete }) {
       <ContactItemBody name={name} tag={tag} />
       <DeleteButton id={id} onDelete={onDelete} />
     </div>
+    
   );
 }
 
