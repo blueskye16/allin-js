@@ -1,0 +1,40 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: gray;
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid black;
+}
+
+header input {
+  padding: 8px;
+  background-color: ghostwhite;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+main {
+  padding: 42px;
+}
+
+.note-create_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+
