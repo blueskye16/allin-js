@@ -8,5 +8,12 @@ export default [
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
-  { settings: { react: { version: '18.0' } } },
+  {
+    settings: { react: { version: '18.0' } },
+    rules: {
+      // 'no-unused-vars': ['warn', { varsIgnorePattern: '^_' }],
+      'no-unused-vars': 'off',
+      'react/prop-types': 'off',
+    }
+  },
 ];

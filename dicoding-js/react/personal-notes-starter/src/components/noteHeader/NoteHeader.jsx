@@ -1,12 +1,12 @@
 import React from 'react';
 
-function NotesHeader() {
+function NoteHeader() {
   return (
-    <div>
+    <header>
       <h1>Notes App</h1>
       <input type="text" placeholder="Cari catatan..." />
-    </div>
+    </header>
   );
 }
 
-export default NotesHeader;
+export default NoteHeader;

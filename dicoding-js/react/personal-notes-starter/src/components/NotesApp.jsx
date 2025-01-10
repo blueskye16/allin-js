@@ -1,5 +1,7 @@
 import React from 'react';
-import NotesHeader from './NotesHeader';
+import NotesHeader from './noteHeader/NoteHeader';
+import NoteCreate from './noteCreate/NoteCreate';
+// import { NoteCreate } from './noteCreate/NoteCreate';
 // import { getInitialData, showFormattedDate } from '../utils/index';
 
 /* class NotesApp extends _React.Component {
@@ -24,6 +26,7 @@ import NotesHeader from './NotesHeader';
     return (
       <div>
         <NotesHeader />
+        <NoteCreate />
       </div>
     )
   }
