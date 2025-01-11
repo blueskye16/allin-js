@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NoteCreateForm from './NoteCreateForm';
+import NoteList from '../noteList/NoteList';
 
 function NoteCreate({ addNotes }) {
   const [remainingTitleChars, setRemainingTitleChars] = useState(20);
@@ -18,6 +19,7 @@ function NoteCreate({ addNotes }) {
         </div>
         <NoteCreateForm addNotes={addNotes} onRemainingTitleChange={handleRemainingTitleChange} />
       </div>
+      <NoteList />
     </main>
   );
 }
