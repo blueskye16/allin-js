@@ -13,8 +13,19 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
   border-bottom: 2px solid black;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+@media only screen and (min-width: 350px) {
+  header h1 {
+    font-size: 2rem;
+  }
 }
 
 header input {
@@ -22,21 +33,25 @@ header input {
   background-color: ghostwhite;
   border: 1px solid #aaa;
   border-radius: 6px;
+  width: 50%;
 }
 
 main {
-  padding: 42px;
+  padding: 1.5rem;
 }
 
 .note-create_container {
   margin: 0px 1.5rem;
-
 }
 
 .note-create_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.note-create_header h2 {
+  font-size: medium;
 }
 
 .note-create_input input {
@@ -79,12 +94,18 @@ main {
   display: grid;
 }
 
+@media only screen and (min-width: 350px) {
+  .note-list_wrap {
+    grid-template-columns: auto auto auto auto;
+    gap: 1rem
+  }
+}
+
 .note-list_item_container {
   margin: 0.5rem 0px;
   border: 2px solid rgb(194, 190, 190);
   border-radius: 10px;
   padding: 1rem;
-
 }
 
 .note-list_item_date {
@@ -97,6 +118,7 @@ main {
 .note-list_item_button_container {
   display: flex;
   justify-content: space-between;
+  margin-top: auto;
 }
 
 .note-list_item_button_container button {
