@@ -9,6 +9,7 @@ class NotesApp extends React.Component {
     super(props);
     this.state = {
       notes: getInitialData(),
+      searchKeyword: '',
     };
 
     this.onSearchHandler = this.onSearchHandler.bind(this);
@@ -59,18 +60,20 @@ class NotesApp extends React.Component {
 
     const { notes, searchKeyword } = this.state;
 
-    // Filter catatan aktif dan arsip berdasarkan kata kunci pencarian
+    // Jika searchKeyword kosong, tampilkan semua catatan (aktif dan arsip)
     const filteredActiveNotes = notes.filter(
       (note) =>
         !note.archived &&
-        (note.title.toLowerCase().includes(searchKeyword) ||
+        (searchKeyword === '' ||
+          note.title.toLowerCase().includes(searchKeyword) ||
           note.body.toLowerCase().includes(searchKeyword))
     );
 
     const filteredArchivedNotes = notes.filter(
       (note) =>
         note.archived &&
-        (note.title.toLowerCase().includes(searchKeyword) ||
+        (searchKeyword === '' ||
+          note.title.toLowerCase().includes(searchKeyword) ||
           note.body.toLowerCase().includes(searchKeyword))
     );
 
