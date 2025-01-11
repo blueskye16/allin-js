@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NoteCreateForm from './NoteCreateForm';
 
 function NoteCreate({ addNotes }) {
-  const [remainingTitleChars, setRemainingTitleChars] = useState(50);
+  const [remainingTitleChars, setRemainingTitleChars] = useState(20);
 
   // Callback to update remaining title characters
   const handleRemainingTitleChange = (remainingChars) => {

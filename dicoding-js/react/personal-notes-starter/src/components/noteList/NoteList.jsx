@@ -2,19 +2,28 @@ import React from 'react';
 import NoteItem from './NoteItem';
 
 // kasih read more ke deskripsi aktif catatan
-function NoteList({ notes }) {
-/*   if (!Array.isArray(notes)) {
-    return <div>Loading notes..</div>;
-
-  } */
+function NoteList({ notes, onDelete, onArchived, containerTitle }) {
   return (
     <div className="note-list_container">
-      <h2>Catatan Aktif</h2>
+      <h2>{containerTitle}</h2>
       {console.log(notes)}
       <div className="note-list_wrap">
-        {notes.map((note) => (
-          <NoteItem key={note.id} {...note} />
-        ))}
+        {notes.length > 0 ? (
+          notes.map((note) => (
+            <NoteItem
+              key={note.id}
+              id={note.id}
+              onDelete={onDelete}
+              onArchived={onArchived}
+              {...note}
+            />
+          ))
+        ) : (
+          <p>Tidak ada catatan.</p>
+        )}
+        {/*         {notes.map((note) => (
+          <NoteItem key={note.id} id={note.id} onDelete={onDelete} {...note} />
+        ))} */}
       </div>
     </div>
   );

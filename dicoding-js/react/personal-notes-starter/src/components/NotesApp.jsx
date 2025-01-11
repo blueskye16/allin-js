@@ -13,6 +13,8 @@ class NotesApp extends React.Component {
 
     // Bind the addNotesHandler function
     this.addNotesHandler = this.addNotesHandler.bind(this);
+    this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    this.onArchiveHandler = this.onArchiveHandler.bind(this);
   }
 
   addNotesHandler({ title, body }) {
@@ -32,12 +34,40 @@ class NotesApp extends React.Component {
     });
   }
 
+  onDeleteHandler(id) {
+    const notes = this.state.notes.filter((note) => note.id !== id);
+    this.setState({ notes });
+  }
+
+  onArchiveHandler(id) {
+    const notes = this.state.notes.map((note) => {
+      if (note.id === id) {
+        return { ...note, archived: !note.archived }; // Toggle archived status
+      }
+      return note;
+    });
+    this.setState({ notes });
+  }
+
   render() {
+    const activeNotes = this.state.notes.filter((note) => !note.archived);
+    const archivedNotes = this.state.notes.filter((note) => note.archived);
     return (
       <div>
         <NotesHeader />
         <NoteCreate addNotes={this.addNotesHandler} /> {/* Pass the handler */}
-        <NoteList notes={this.state.notes} />
+        <NoteList
+          notes={activeNotes}
+          onDelete={this.onDeleteHandler}
+          onArchived={this.onArchiveHandler}
+          containerTitle="Catatan Aktif"
+        />
+        <NoteList
+          notes={archivedNotes}
+          onDelete={this.onDeleteHandler}
+          onArchived={this.onArchiveHandler}
+          containerTitle="Catatan Arsip"
+        />
       </div>
     );
   }
