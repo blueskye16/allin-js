@@ -11,7 +11,7 @@ class NotesApp extends React.Component {
       notes: getInitialData(),
     };
 
-    // Bind the addNotesHandler function
+    this.onSearchHandler = this.onSearchHandler.bind(this);
     this.addNotesHandler = this.addNotesHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
@@ -49,21 +49,43 @@ class NotesApp extends React.Component {
     this.setState({ notes });
   }
 
+  onSearchHandler(keyword) {
+    this.setState({ searchKeyword: keyword.toLowerCase() }); // Simpan kata kunci dalam huruf kecil
+  }
+
   render() {
-    const activeNotes = this.state.notes.filter((note) => !note.archived);
-    const archivedNotes = this.state.notes.filter((note) => note.archived);
+    /*const activeNotes = this.state.notes.filter((note) => !note.archived);
+    const archivedNotes = this.state.notes.filter((note) => note.archived);*/
+
+    const { notes, searchKeyword } = this.state;
+
+    // Filter catatan aktif dan arsip berdasarkan kata kunci pencarian
+    const filteredActiveNotes = notes.filter(
+      (note) =>
+        !note.archived &&
+        (note.title.toLowerCase().includes(searchKeyword) ||
+          note.body.toLowerCase().includes(searchKeyword))
+    );
+
+    const filteredArchivedNotes = notes.filter(
+      (note) =>
+        note.archived &&
+        (note.title.toLowerCase().includes(searchKeyword) ||
+          note.body.toLowerCase().includes(searchKeyword))
+    );
+
     return (
       <div>
-        <NotesHeader />
+        <NotesHeader onSearch={this.onSearchHandler} />
         <NoteCreate addNotes={this.addNotesHandler} /> {/* Pass the handler */}
         <NoteList
-          notes={activeNotes}
+          notes={filteredActiveNotes}
           onDelete={this.onDeleteHandler}
           onArchived={this.onArchiveHandler}
           containerTitle="Catatan Aktif"
         />
         <NoteList
-          notes={archivedNotes}
+          notes={filteredArchivedNotes}
           onDelete={this.onDeleteHandler}
           onArchived={this.onArchiveHandler}
           containerTitle="Catatan Arsip"
