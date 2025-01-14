@@ -4,7 +4,7 @@ import NotesApp from './components/NotesApp'
 
 // import style
 
-import './styles/vin-style.css';
+import './styles/style.css';
 
 const root = createRoot(document.getElementById('root'));
 root.render(<NotesApp />);

@@ -80,7 +80,7 @@ class NotesApp extends React.Component {
     return (
       <div>
         <NotesHeader onSearch={this.onSearchHandler} />
-        <NoteCreate addNotes={this.addNotesHandler} /> {/* Pass the handler */}
+        <NoteCreate addNotes={this.addNotesHandler} />
         <NoteList
           notes={filteredActiveNotes}
           onDelete={this.onDeleteHandler}

@@ -7,7 +7,7 @@ function NotesHeader({ onSearch }) {
       <input
         type="text"
         placeholder="Cari catatan..."
-        onChange={(e) => onSearch(e.target.value)} // Panggil onSearch saat input berubah
+        onChange={(e) => onSearch(e.target.value)}
       />
     </header>
   );

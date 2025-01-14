@@ -4,7 +4,6 @@ import NoteCreateForm from './NoteCreateForm';
 function NoteCreate({ addNotes }) {
   const [remainingTitleChars, setRemainingTitleChars] = useState(20);
 
-  // Callback to update remaining title characters
   const handleRemainingTitleChange = (remainingChars) => {
     setRemainingTitleChars(remainingChars);
   };
