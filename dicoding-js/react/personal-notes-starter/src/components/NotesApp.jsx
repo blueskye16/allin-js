@@ -12,13 +12,13 @@ class NotesApp extends React.Component {
       searchKeyword: '',
     };
 
-    this.onSearchHandler = this.onSearchHandler.bind(this);
-    this.addNotesHandler = this.addNotesHandler.bind(this);
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onArchiveHandler = this.onArchiveHandler.bind(this);
+    // this.onSearchHandler = this.onSearchHandler.bind(this);
+    // this.addNotesHandler = this.addNotesHandler.bind(this);
+    // this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    // this.onArchiveHandler = this.onArchiveHandler.bind(this);
   }
 
-  addNotesHandler({ title, body }) {
+  addNotesHandler = ({ title, body }) => {
     this.setState((prevState) => {
       return {
         notes: [
@@ -35,12 +35,12 @@ class NotesApp extends React.Component {
     });
   }
 
-  onDeleteHandler(id) {
+  onDeleteHandler = (id) => {
     const notes = this.state.notes.filter((note) => note.id !== id);
     this.setState({ notes });
   }
 
-  onArchiveHandler(id) {
+  onArchiveHandler= (id) => {
     const notes = this.state.notes.map((note) => {
       if (note.id === id) {
         return { ...note, archived: !note.archived }; // Toggle archived status
@@ -50,17 +50,12 @@ class NotesApp extends React.Component {
     this.setState({ notes });
   }
 
-  onSearchHandler(keyword) {
-    this.setState({ searchKeyword: keyword.toLowerCase() }); // Simpan kata kunci dalam huruf kecil
+  onSearchHandler = (keyword) => {
+    this.setState({ searchKeyword: keyword.toLowerCase() });
   }
 
   render() {
-    /*const activeNotes = this.state.notes.filter((note) => !note.archived);
-    const archivedNotes = this.state.notes.filter((note) => note.archived);*/
-
     const { notes, searchKeyword } = this.state;
-
-    // Jika searchKeyword kosong, tampilkan semua catatan (aktif dan arsip)
     const filteredActiveNotes = notes.filter(
       (note) =>
         !note.archived &&
@@ -79,6 +74,7 @@ class NotesApp extends React.Component {
 
     return (
       <div>
+        {/* <NotesHeader onSearch={this.handlerHelper(this.onSearchHandler)} /> */}
         <NotesHeader onSearch={this.onSearchHandler} />
         <NoteCreate addNotes={this.addNotesHandler} />
         <NoteList
