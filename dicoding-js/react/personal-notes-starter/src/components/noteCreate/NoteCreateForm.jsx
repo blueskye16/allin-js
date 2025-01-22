@@ -4,7 +4,6 @@ class NoteCreateForm extends React.Component {
   constructor(props) {
     super(props);
 
-    // Initialize state
     this.state = {
       title: '',
       body: '',
@@ -23,16 +22,14 @@ class NoteCreateForm extends React.Component {
       title: this.state.title,
       body: this.state.body,
     });
-    this.setState({ title: '', body: '' }); // Clear the form after submission
+    this.setState({ title: '', body: '' });
   }
 
   onTitleChangeEventHandler(event) {
-    // this.setState({ title: event.target.value });
     const value = event.target.value;
     if (value.length <= this.state.maxTitleLength) {
       this.setState({ title: value });
       const remainingTitleChars = this.state.maxTitleLength - value.length;
-      // Call the callback to send remainingTitleChars to the parent component
       this.props.onRemainingTitleChange(remainingTitleChars);
     }
   }

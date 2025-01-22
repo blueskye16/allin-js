@@ -17,7 +17,6 @@ import ContactInput from './ContactInput';
 export default ContactApp;
  */
 
-
 class ContactApp extends _React.Component {
   constructor(props) {
     super(props);

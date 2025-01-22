@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: gray;
+}
+
+h1 {
+  font-size: x-large;
+  margin: 10px;
+}
+
+.container {
+  margin: 1rem 2rem;
+  background-color: rgb(173, 169, 169);
+}
+
+.answer-text {
+  padding: 1rem;
+  font-size: 2.5rem;
+  text-align: end;
+}
+
+.blinking-cursor {
+  font-weight: bold;
+  font-size: 1.5rem; /* Sesuaikan ukuran sesuai kebutuhan */
+  color: black;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+ul {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+ul li {
+  list-style: none;
+  font-size: larger;
+  padding: 0.5rem;
+  background-color: rgb(235, 250, 245);
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+ul li:hover {
+  background-color: rgb(114, 114, 114);
+  transition: 2ms ease all;
+}

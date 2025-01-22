@@ -9,15 +9,16 @@ class NotesApp extends React.Component {
     super(props);
     this.state = {
       notes: getInitialData(),
+      searchKeyword: '',
     };
 
-    // Bind the addNotesHandler function
-    this.addNotesHandler = this.addNotesHandler.bind(this);
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onArchiveHandler = this.onArchiveHandler.bind(this);
+    // this.onSearchHandler = this.onSearchHandler.bind(this);
+    // this.addNotesHandler = this.addNotesHandler.bind(this);
+    // this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    // this.onArchiveHandler = this.onArchiveHandler.bind(this);
   }
 
-  addNotesHandler({ title, body }) {
+  addNotesHandler = ({ title, body }) => {
     this.setState((prevState) => {
       return {
         notes: [
@@ -34,12 +35,12 @@ class NotesApp extends React.Component {
     });
   }
 
-  onDeleteHandler(id) {
+  onDeleteHandler = (id) => {
     const notes = this.state.notes.filter((note) => note.id !== id);
     this.setState({ notes });
   }
 
-  onArchiveHandler(id) {
+  onArchiveHandler= (id) => {
     const notes = this.state.notes.map((note) => {
       if (note.id === id) {
         return { ...note, archived: !note.archived }; // Toggle archived status
@@ -49,21 +50,41 @@ class NotesApp extends React.Component {
     this.setState({ notes });
   }
 
+  onSearchHandler = (keyword) => {
+    this.setState({ searchKeyword: keyword.toLowerCase() });
+  }
+
   render() {
-    const activeNotes = this.state.notes.filter((note) => !note.archived);
-    const archivedNotes = this.state.notes.filter((note) => note.archived);
+    const { notes, searchKeyword } = this.state;
+    const filteredActiveNotes = notes.filter(
+      (note) =>
+        !note.archived &&
+        (searchKeyword === '' ||
+          note.title.toLowerCase().includes(searchKeyword) ||
+          note.body.toLowerCase().includes(searchKeyword))
+    );
+
+    const filteredArchivedNotes = notes.filter(
+      (note) =>
+        note.archived &&
+        (searchKeyword === '' ||
+          note.title.toLowerCase().includes(searchKeyword) ||
+          note.body.toLowerCase().includes(searchKeyword))
+    );
+
     return (
       <div>
-        <NotesHeader />
-        <NoteCreate addNotes={this.addNotesHandler} /> {/* Pass the handler */}
+        {/* <NotesHeader onSearch={this.handlerHelper(this.onSearchHandler)} /> */}
+        <NotesHeader onSearch={this.onSearchHandler} />
+        <NoteCreate addNotes={this.addNotesHandler} />
         <NoteList
-          notes={activeNotes}
+          notes={filteredActiveNotes}
           onDelete={this.onDeleteHandler}
           onArchived={this.onArchiveHandler}
           containerTitle="Catatan Aktif"
         />
         <NoteList
-          notes={archivedNotes}
+          notes={filteredArchivedNotes}
           onDelete={this.onDeleteHandler}
           onArchived={this.onArchiveHandler}
           containerTitle="Catatan Arsip"
