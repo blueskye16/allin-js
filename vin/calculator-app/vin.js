@@ -1,33 +1,76 @@
-let answer = '';
 let currentInput = '0';
 let previousInput = '';
 let operator = '';
+let answer = '';
+const getNumberElements = document.getElementsByClassName('btn-number');
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const answerElement = document.getElementById('answer');
   const numberElements = getNumberElements;
   const nonNumberElements = getNonNumberElements();
 
+  document.addEventListener('keydown', handleKeyboardInput);
+
   Array.from(numberElements).forEach((btnElement) => {
     btnElement.addEventListener('click', () => {
       handleNumberClick(btnElement.innerText);
-      answer += btnElement.innerText;
       updateAnswer(answerElement);
     });
   });
-
-  /* nampilin elemen yang diklik antara angka sama operatornya masih terpisah, makanya ilang - ilangan */
 
   Object.values(nonNumberElements).forEach((btnElement) => {
     btnElement.addEventListener('click', () => {
       handleOperatorClick(btnElement.id);
-      answer += operator;
       updateAnswer(answerElement);
     });
   });
-
-  // updateAnswer(answerElement);
 });
+
+function handleKeyboardInput(keyboardPress) {
+  console.log(keyboardPress.key);
+  const answerElement = document.getElementById('answer');
+
+  switch (true) {
+    case !isNaN(keyboardPress.key) && keyboardPress.key.trim() !== '':
+      handleNumberClick(keyboardPress.key);
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.code === 'Escape':
+      handleOperatorClick('btnDeleteAll');
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.code === 'Backspace':
+      handleOperatorClick('btnBackspace');
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.code === 'Equal' || keyboardPress.code === 'Enter':
+      handleOperatorClick('btnEqual');
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.key === '+':
+      handleOperatorClick('btnPlus');
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.key === '-':
+      handleOperatorClick('btnSubstraction');
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.key === '*':
+      handleOperatorClick('btnMultiple');
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.key === '/':
+      handleOperatorClick('btnDivision');
+      updateAnswer(answerElement);
+      break;
+    case keyboardPress.key === '%':
+      handleOperatorClick('btnPercent');
+      updateAnswer(answerElement);
+      break;
+    default:
+  }
+}
 
 function handleNumberClick(value) {
   if (currentInput === '0') {
@@ -36,6 +79,8 @@ function handleNumberClick(value) {
   } else {
     currentInput += value;
   }
+
+  answer += value;
 }
 
 function handleOperatorClick(operatorId) {
@@ -48,16 +93,20 @@ function handleOperatorClick(operatorId) {
       break;
     case 'btnEqual':
       calculateResult();
-      operator = '=';
       break;
     default:
       if (previousInput && operator) {
         calculateResult();
       }
-      operator = mapOperator(operatorId);
-      previousInput = currentInput;
-      currentInput = '';
-      break;
+      if (operator && !currentInput) {
+        return;
+      } else {
+        operator = mapOperator(operatorId);
+        answer += `${operator}`;
+        previousInput = currentInput;
+        currentInput = '';
+        break;
+      }
   }
 }
 
@@ -73,10 +122,7 @@ function mapOperator(operatorId) {
 }
 
 function calculateResult() {
-  // if (!previousInput || !operator || !currentInput) return;
-  // if (!currentInput && !previousInput && !operator) {
-  //   return error;
-  // }
+  if (!currentInput || !operator || !previousInput) return;
 
   const firstValue = parseFloat(previousInput);
   const secondValue = parseFloat(currentInput);
@@ -101,40 +147,43 @@ function calculateResult() {
     default:
       return;
   }
+
   currentInput = result.toString();
-  // previousInput = "";
+  previousInput = '';
   operator = '';
+  answer = result.toString();
 }
 
-function clearAll(answerElement) {
-  // const blinkingCursor = document.createElement('span');
-  // blinkingCursor.innerText = '|';
-  // blinkingCursor.className = 'blinking-cursor';
-  // blinkingCursor.appendChild(answerElement);
-
-  answer = '0';
+function clearAll() {
   currentInput = '0';
+  previousInput = '';
   operator = '';
+  answer = '0';
 }
 
 function backspaceInput() {
   if (currentInput.length > 1) {
     currentInput = currentInput.slice(0, -1);
+  } else if (currentInput.length === 1 && currentInput !== '') {
+    currentInput = '';
+  } else if (operator) {
+    operator = '';
+    answer = answer.slice(0, -1).trim();
+
+    if (previousInput) {
+      currentInput = previousInput;
+      previousInput = '';
+    }
   } else {
     currentInput = '0';
   }
+
+  answer = `${previousInput} ${operator} ${currentInput}`.trim();
 }
 
 function updateAnswer(answerElement) {
-  if (operator !== '=') {
-    answerElement.innerText = answer;
-  } else if (operator == '=') {
-    answerElement.innerText = currentInput;
-    answer = currentInput;
-  }
+  answerElement.innerText = answer || '0';
 }
-
-const getNumberElements = document.getElementsByClassName('btn-number');
 
 function getNonNumberElements() {
   return {
