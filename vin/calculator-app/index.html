@@ -3,46 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <script src="https://unpkg.com/feather-icons"></script> -->
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- font poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style.css" />
-    <script src="./vin.js"></script>
-    <!-- <script src="./gas.js"></script> -->
+    <script src="./main.js"></script>
 
     <title>Calculator App</title>
   </head>
   <body>
-    <h1 class="">Standard</h1>
+    <h1>Standard Calculator</h1>
 
     <div class="container">
       <p class="answer-text" id="answer">
         <span class="blinking-cursor">|</span>
       </p>
-      <!-- <p class="answer-text" id="answer">0</p> -->
       <ul>
-        <li class="btn-calculator" id="btnDeleteAll">AC</li>
-        <li class="btn-calculator" id="btnPercent">%</li>
-        <li class="btn-calculator" id="btnBackspace">del</li>
-        <li class="btn-calculator" id="btnDivision">/</li>
-        <li class="btn-calculator btn-number" id="btnSeven">7</li>
-        <li class="btn-calculator btn-number" id="btnEight">8</li>
-        <li class="btn-calculator btn-number" id="btnNine">9</li>
-        <li class="btn-calculator" id="btnMultiple">x</li>
-        <li class="btn-calculator btn-number" id="btnFour">4</li>
-        <li class="btn-calculator btn-number" id="btnFive">5</li>
-        <li class="btn-calculator btn-number" id="btnSix">6</li>
-        <li class="btn-calculator" id="btnSubstraction">-</li>
-        <li class="btn-calculator btn-number" id="btnOne">1</li>
-        <li class="btn-calculator btn-number" id="btnTwo">2</li>
-        <li class="btn-calculator btn-number" id="btnThree">3</li>
-        <li class="btn-calculator" id="btnPlus">+</li>
-        <li class="btn-calculator btn-number" id="btnDoubleZero">00</li>
-        <li class="btn-calculator btn-number" id="btnZero">0</li>
-        <li class="btn-calculator btn-number" id="btnDot">.</li>
-        <li class="btn-calculator" id="btnEqual">=</li>
+        <li id="btnDeleteAll">AC</li>
+        <li id="btnPercent">%</li>
+        <li id="btnBackspace">del</li>
+        <li id="btnDivision">/</li>
+        <li class="btn-number">7</li>
+        <li class="btn-number">8</li>
+        <li class="btn-number">9</li>
+        <li id="btnMultiple">x</li>
+        <li class="btn-number">4</li>
+        <li class="btn-number">5</li>
+        <li class="btn-number">6</li>
+        <li id="btnSubstraction">-</li>
+        <li class="btn-number">1</li>
+        <li class="btn-number">2</li>
+        <li class="btn-number">3</li>
+        <li id="btnPlus">+</li>
+        <li class="btn-number">00</li>
+        <li class="btn-number">0</li>
+        <li class="btn-number">.</li>
+        <li id="btnEqual">=</li>
       </ul>
     </div>
-    <!-- <script>
+    <script>
       feather.replace();
-    </script> -->
+    </script>
   </body>
 </html>

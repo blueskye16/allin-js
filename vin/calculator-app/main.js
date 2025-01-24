@@ -4,7 +4,6 @@ let operator = '';
 let answer = '';
 const getNumberElements = document.getElementsByClassName('btn-number');
 
-
 document.addEventListener('DOMContentLoaded', () => {
   const answerElement = document.getElementById('answer');
   const numberElements = getNumberElements;

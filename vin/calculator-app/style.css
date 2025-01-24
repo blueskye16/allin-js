@@ -2,26 +2,43 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", serif;
 }
 
 body {
-  background-color: gray;
-}
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(50,215,77,1) 100%);}
 
 h1 {
   font-size: x-large;
-  margin: 10px;
+  margin: 1rem;
+  margin-left: 2rem;
 }
 
 .container {
-  margin: 1rem 2rem;
-  background-color: rgb(173, 169, 169);
+  margin: 1rem;
+  background-color: rgb(22, 44, 168);
+  border-radius: 20px;
+}
+
+@media only screen and (min-width: 350px) {
+  .container {
+  width: 50vw;
+  height: 80vh;
+  margin: auto;
+  }
+  
 }
 
 .answer-text {
   padding: 1rem;
   font-size: 2.5rem;
   text-align: end;
+  color: white;
+}
+
+.answer-text span {
+  color: white;
 }
 
 .blinking-cursor {
@@ -32,7 +49,8 @@ h1 {
 }
 
 @keyframes blink {
-  from, to {
+  from,
+  to {
     opacity: 1;
   }
   50% {
@@ -45,6 +63,7 @@ ul {
   grid-template-columns: auto auto auto auto;
   gap: 1rem;
   padding: 0.5rem;
+  padding-top: 2.5rem;
 }
 
 ul li {
@@ -58,6 +77,6 @@ ul li {
 }
 
 ul li:hover {
-  background-color: rgb(114, 114, 114);
+  background-color: rgb(123, 124, 122);
   transition: 2ms ease all;
 }
